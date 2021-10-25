@@ -1,0 +1,21 @@
+# READ ME
+
+Talk *'An Adaptive Approach for the Coordination of Autonomous Vehicles at Intersections'* given by [Stefano Mariani](https://smarianimore.github.io) at [WETICE 2021](http://eexposit.perso.univ-pau.fr/wetice/)
+
+# Credits
+
+Reveal.js template presentation as a GitHub repo Template: [here](https://github.com/pacharanero/create-new-revealjs-template)
+
+* Includes Reveal.js as a Git submodule so that its commit history is not confused with this presentation's history
+* Makes future updating of Reveal.js version very easy
+* Reduces the size of the presentation repositories significantly
+
+## Updating Reveal.js
+
+* You may get Dependabot alerts from GitHub to warn you of vulnerabilities in the Reveal.js code. To make these go away, update the submodule.
+* Use the command `git submodule update --rebase --remote` in the **root** of the repository (not the submodule directory) to update.
+* link for info on updating submodules https://stackoverflow.com/questions/1979167/git-submodule-update
+
+## License
+
+* MIT Licensed as per Reveal.js itself 
