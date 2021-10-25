@@ -7,8 +7,8 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
-    <title>Adaptive Intersections @ WETICE 2021</title>
-    <meta content="Talk 'An Adaptive Approach for the Coordination of Autonomous Vehicles at Intersections' given by Stefano Mariani at WETICE 2021" name="description">
+    <title>Autonomy in self-driving @ ISOLA 2021</title>
+    <meta content="Talk 'Degrees of Autonomy in Coordinating Collectives of Self-Driving Vehicles' given by Stefano Mariani at ISOLA 2021" name="description">
     <meta content="Stefano Mariani" name="author">
 
     <meta content="yes" name="apple-mobile-web-app-capable">
@@ -40,11 +40,11 @@
       <div class="slides">
 
         <section data-transition="convex">
-          <p><small> ACEC @ WETICE, 27/20/2021 </small></p>
+          <p><small> REoCAS @ ISOLA, 27/10/2021 </small></p>
           <hr>
-          <h3> An Adaptive Approach for the Coordination of Autonomous Vehicles at Intersections </h3>
+          <h3> Degrees of Autonomy in Coordinating Collectives of Self-Driving Vehicles </h3>
           <hr>
-          <p> Nicholas Glorio, <a href="https://smarianimore.github.io">Stefano Mariani</a>, Giacomo Cabri, Franco Zambonelli </p>
+          <p> <a href="https://smarianimore.github.io">Stefano Mariani</a> and Franco Zambonelli </p>
           <hr>
           <p><small><em> Università di Modena e Reggio Emilia </em></small></p>
         </section>
@@ -55,186 +55,211 @@
           <ul>
             <li> current research on self-driving mostly about <em>individual</em> vehicles </li>
             <div class="fragment">
-              <li> but <em>cooperative driving</em> is necessary for collective vehicles in many situations </li>
-              <ul>
-                <li> e.g. crossing intersections </li>
-              </ul>
+              <li> but <em>cooperative driving</em> is necessary for collectives of vehicles in many situations </li>
+              <small><ul>
+                <li> e.g. crossing intersections, platoon formation, fleet management, ... </li>
+              </ul></small>
             </div>
             <div class="fragment">
-              <li> hence we study <strong>intersection management</strong> </li>
-              <ul>
-                <li> <strong>compare</strong> state of art approaches </li>
-                <li> propose <strong>adaptive</strong> approach </li>
-              </ul>
+              <li> cooperative driving demands for <strong>coordination</strong> </li>
+              <small><ul>
+                <li> we overview <strong>key issues</strong> in coordinating self-driving vehicles </li>
+                <li> we focus on intersection crossing and <strong>categorise</strong> existing approaches </li>
+                <li> we argue for an <strong>adjustable autonomy</strong> approach </li>
+                <li> we overview <strong>key challenges</strong> for this </li>
+              </ul></small>
             </div>
           </ul>
         </section>
 
         <section data-transition="convex">
           <section data-transition="slide">
-            <h3> Intersection crossing: problem </h3>
+            <h3> Key issues </h3>
             <hr>
             <ul>
-              <li> decision making process orchestrating vehicles' actions </li>
+              <li> coordinating vehicles $\rightarrow$ decision making process orchestrating vehicles' actions </li>
               <ul>
-                <li> <strong>necessary</strong> to achieve own goal </li>
-                <li> <em>competitive</em> access to <em>shared</em> resource </li>
+                <li class="fragment"> <strong>necessary</strong> to achieve own and shared ones </li>
+                <li class="fragment"> <em>competitive/collaborative</em>, <em>resource/task</em> -oriented </li>
               </ul>
               <li class="fragment"> poses 3 challenges </li>
               <ul>
-                <li class="fragment"> <em>safety</em>: no collisions </li>
-                <li class="fragment"> <em>liveness</em>: right of way for everyone </li>
-                <li class="fragment"> <em>quality</em>: max./min. throughput/delay </li>
+                <li class="fragment"> <em>safety</em>: no collisions, usually </li>
+                <li class="fragment"> <em>liveness</em>: problem specific* </li>
+                <li class="fragment"> <em>quality</em>: problem specific* </li>
               </ul>
+            </ul>
+            <hr>
+            <p class="fragment" style="color:grey"><small>*e.g. intersection crossing $\rightarrow$ no waiting forever, max throughput</small></p>
+          </section>
+          <section data-transition="slide">
+            <h3> Problems overview </h3>
+            <hr>
+            <small><table>
+              <tr>
+                <th>  </th>
+                <th> resource-oriented </th>
+                <th> task-oriented </th>
+              </tr>
+              <tr>
+                <td> <strong>competitive</strong> </td>
+                <td> intersection crossing, parking (private) </td>
+                <td> ride sharing (private), ramp merging </td>
+              </tr>
+              <tr>
+                <td> <strong>collaborative</strong> </td>
+                <td> parking (fleets), traffic flow optimisation </td>
+                <td> ride sharing (fleets), platooning </td>
+              </tr>
+            </table></small>
+            <div class="fragment">
+              <p> Focus on: intersection crossing
+                <small><ul>
+                  <li> safety $\rightarrow$ no collisions </li>
+                  <li> liveness $\rightarrow$ each vehicle eventually gets right of way </li>
+                  <li> quality $\rightarrow$ min. cumulative delay / max. crossing throughput </li>
+                </ul></small>
+              </p>
+            </div>
+              <!--<div class="fragment">
+                <li> smart parking: competitive, resource-oriented </li>
+                <li> ride sharing: competitive/collaborative*, task-oriented </li>
+                <li> ramp merging: cooperative, task-oriented </li>
+                <li> platooning: cooperative, task-oriented </li>
+                <li> traffic flow optimisation: all of the above </li>
+              </div>
+            <hr>
+            <p class="fragment" style="color:grey"><small>*private vehicles $\rightarrow$ competitive, company fleets $\rightarrow$ collaborative</small></p>-->
+          </section>
+        </section>
+
+        <section data-transition="convex">
+          <section data-transition="slide">
+            <h3> Autonomy-based categorisation </h3>
+            <hr>
+            <p> Approaches categorised based on <strong>degree of autonomy</strong> left to vehicles during coordination </p>
+            <p><small>i.e. <em>to what extent vehicles can decide their own actions</em></small></p>
+            <img class="fragment fade-in" data-src="autonomy.png">
+          </section>
+          <section data-transition="slide">
+            <h3> Categories </h3>
+            <hr>
+            <ul>
+              <div class="fragment">
+                <li> centralised </li>
+                <small><ul>
+                  <li> <em>burden of coordination</em> onto a single entity (Intersection Manager) </li>
+                  <li> every vehicles abides to IM decisions by design </li>
+                </ul></small>
+              </div>
+              <div class="fragment">
+                <li> negotiation-based </li>
+                <small><ul>
+                  <li> burden distributed amongst vehicles (and possibly a broker) </li>
+                  <li> fixed coordination protocol, fixed goal, fixed strategies </li>
+                </ul></small>
+              </div>
+              <div class="fragment">
+                <li> agreement-based </li>
+                <small><ul>
+                  <li> burden distributed amongst vehicles </li>
+                  <li> dynamic coordination protocol, dynamic goal, switching strategies </li>
+                </ul></small>
+              </div>
+              <div class="fragment">
+                <li> emergent </li>
+                <small><ul>
+                  <li> burden distributed amongst vehicles </li>
+                  <li> no explicit protocol, no shared goals </li>
+                </ul></small>
+              </div>
+            </ul>
+          </section>
+        </section>
+
+        <section data-transition="convex">
+          <section data-transition="slide">
+            <h3> Intersection crossing </h3>
+            <hr>
+            <ul>
+              <div class="fragment">
+                <li> centralised </li>
+                <small><ul>
+                  <li> easiest to rigorously engineer and formally verify </li>
+                  <li> guarantees of safety and liveness often available </li>
+                  <li> the IM is a bottleneck, and demands for dedicated infrastructure </li>
+                </ul></small>
+              </div>
+              <div class="fragment">
+                <li> negotiation-based </li>
+                <small><ul>
+                  <li> still formally verifiable as protocol is fixed </li>
+                  <li> can still guarantee safety if vehicles comply (no attackers) </li>
+                  <li> liveness can be an issue especially for auctions </li>
+                  <li> <em>neutrality</em> issues may arise (the rich always win) </li>
+                </ul></small>
+              </div>
+              <div class="fragment">
+                <li> agreement-based </li>
+                <small><ul>
+                  <li> not much literature in this category </li>
+                  <li> usually difficult to implement, analyse, and control </li>
+                  <li> but may provide several benefits, e.g. flexibility and explainability </li>
+                </ul></small>
+              </div>
+              <div class="fragment">
+                <li> emergent </li>
+                <small><ul>
+                  <li> difficult to guarantee any property </li>
+                  <li> potentially relevant in mixed scenarios (i.e. with human drivers too) </li>
+                </ul></small>
+              </div>
             </ul>
           </section>
           <section data-transition="slide">
-            <h3> Intersection crossing: solutions </h3>
+            <h3> Why adjustable autonomy </h3>
+            <hr>
+            <p><em>A single approach can hardly fit all possible run-time situations</em></p>
+            <ul>
+              <div class="fragment">
+                <li> low traffic $\rightarrow$ negotiation/agreement based </li>
+                <ul>
+                  <li> more autonomy to vehicles </li>
+                  <li> still manageable in number of messages </li>
+                </ul>
+              </div>
+              <div class="fragment">
+                <li> high traffic $\rightarrow$ centralised approaches </li>
+                <ul>
+                  <li> less autonomy to vehicles </li>
+                  <li> strict control to avoid collisions and delays </li>
+                </ul>
+              </div>
+            </ul>
+            <p class="fragment"><strong>Thus: switch 'em!</strong></p>
+          </section>
+          <section data-transition="slide">
+            <h3> How adjustable autonomy </h3>
             <hr>
             <ul>
-              <li> <em>today</em>: traffic light, precedence rules </li>
+              <li> Open issue in cooperative driving, proposals in robotics and MAS </li>
+              <li> Several challenges (akin to MAPE-K loop) </li>
               <ul>
-                <li> safe & inefficient </li>
-                <li> efficient & unsafe </li>
+                <li class="fragment"> <strong>learn</strong> best approach for each problem and specific situation </li>
+                <li class="fragment"> have functional and non-functional <strong>performance metrics</strong> available to decide </li>
+                <li class="fragment"> decide <strong>when</strong> to switch, possibly before degradation of efficacy </li>
+                <li class="fragment"> decide <strong>how</strong> to switch (can't "pause" vehicles) </li>
               </ul>
-              <div class="fragment">
-                <li> <em>tomorrow</em>: thanks to V2I / V2V </li>
-                <ul>
-                  <li> reservation </li>
-                  <li> negotiation (e.g. auction) </li>
-                  <li> others (e.g. DCOP, game-theoretic, self-org) </li>
-                </ul>
-              </div>
             </ul>
           </section>
-        </section>
-
-        <section data-transition="convex">
           <section data-transition="slide">
-            <h3> Performance comparison </h3>
+            <h3> Further challenges </h3>
             <hr>
+            <p> Besides adjustable autonomy, cooperative <em>coordinated</em> driving still in its infancy </p>
             <ul>
-              <li> SUMO simulations, controlled via TraCi API (<a href="https://www.eclipse.org/sumo/">www.eclipse.org/sumo/</a>) </li>
-              <li> <strong>reservation</strong> based on temporal allocations of the intersection area, divided into a grid of occupancy cells [1] </li>
-              <li> <strong>English auctions</strong> with virtual wallets [2] </li>
-            </ul>
-            <hr>
-            <p style="color:grey"><small><em> [1] Kurt M. Dresner, Peter Stone: A Multiagent Approach to Autonomous Intersection Management. J. Artif. Intell. Res. 31: 591-656 (2008) </em></small></p>
-            <p style="color:grey"><small><em> [2] Dustin Carlino, Stephen D. Boyles, Peter Stone: Auction-based autonomous intersection management. ITSC 2013: 529-534 </em></small></p>
-          </section>
-          <section data-transition="slide">
-            <h3> Simulation settings </h3>
-            <hr>
-            <style>
-              .container{
-                display: flex;
-              }
-              .col{
-                flex: 1;
-              }
-            </style>
-            <div class="container">
-              <div class="col">
-                <img width="512" height="384" align="left" data-src="junction.png">
-              </div>
-              <div class="col">
-                <ul>
-                  <li> single 4-ways junction </li>
-                  <li> 3 lanes for each way </li>
-                  <li> 1 to 4 vehicles/second (traffic condition) </li>
-                  <li> 33/66 % of left turning </li>
-                  <li> 30 runs for each params combination </li>
-                </ul>
-              </div>
-            </div>
-          </section>
-          <section data-transition="slide">
-            <h3> Results </h3>
-            <hr>
-            <style>
-              .container{
-                display: flex;
-              }
-              .col{
-                flex: 1;
-              }
-            </style>
-            <div class="container">
-              <div class="col">
-                <img width="512" height="384" align="left" data-src="throughput_24-05-2021.png">
-              </div>
-              <div class="col">
-                <img width="512" height="384" align="left" data-src="st_dev_head_time_24-05-2021.png">
-              </div>
-            </div>
-            <ul>
-              <li class="fragment"> no approach works best across traffic conditions </li>
-              <li class="fragment"> no approach works best across performance metrics </li>
-            </ul>
-          </section>
-        </section>
-
-        <section data-transition="convex">
-          <section data-transition="slide">
-            <h3> Adaptive approach </h3>
-            <hr>
-            <ul>
-              <li class="fragment"> <strong>learn</strong> which approach works best in which traffic condition </li>
-              <li class="fragment"> <strong>apply</strong> the best approach known upon changing conditions </li>
-              <li class="fragment"> both with respect to a <em>target performance metric</em> </li>
-            </ul>
-            <hr>
-            <p class="fragment">
-              <small><em>municipalities already do this!<br>(e.g. traffic lights turned off at night)</em></small>
-            </p>
-          </section>
-          <section data-transition="slide">
-            <h3> Adaptive Intersection Manager (AIM) </h3>
-            <hr>
-            <ol>
-              <div class="fragment">
-                <li> learning phase (naive <em>Q-learning</em>*): </li>
-                <small><ol>
-                  <li> randomly select coordination approach $A$ </li>
-                  <li> apply $A$ for a given time $T$ </li>
-                  <li> monitor both traffic conditions $C$ and target performance metric $M$ during $T$ </li>
-                </ol></small>
-              </div>
-              <div class="fragment">
-                <li> adaptation phase: </li>
-                <small><ol>
-                  <li> sample traffic condition $C$ </li>
-                  <li> lookup best approach $A$ for $C$ regarding $M$ </li>
-                  <li> apply $A$ until $C \rightarrow C'$ </li>
-                  <li> loop </li>
-                </ol></small>
-              </div>
-            </ol>
-            <hr>
-            <p class="fragment"><small><em> * action = application of $a \in A$ during $T$, reward = $M$ measured during $T$ </em></small></p>
-          </section>
-          <section data-transition="slide">
-            <h3> Results </h3>
-            <hr>
-            <style>
-              .container{
-                display: flex;
-              }
-              .col{
-                flex: 1;
-              }
-            </style>
-            <div class="container">
-              <div class="col">
-                <img width="512" height="384" align="left" data-src="th_training_th2.png">
-              </div>
-              <div class="col">
-                <img width="512" height="384" align="left" data-src="sv_training_sv2.png">
-              </div>
-            </div>
-            <ul>
-              <li class="fragment"> the AIM <em>pursues</em> the best $A$ known for every $C$ </li>
-              <li class="fragment"> the AIM accounts for the target $M$ to optimise </li>
+              <li class="fragment"> <strong>system of systems</strong> coordination (e.g. "butterfly effects" in intersection networks) </li>
+              <li class="fragment"> <strong>dynamic pricing</strong> mechanisms may arise, threatening fairness and road neutrality </li>
+              <li class="fragment"> dealing with <strong>mixed scenarios</strong>, as level 5 self-driving will not replace legacy vehicles overnight </li>
             </ul>
           </section>
         </section>
@@ -253,16 +278,15 @@
           <div class="container">
             <div class="col fragment">
               <ul>
-                <li> adaptive approach to intersection crossing presented </li>
-                <li> simulations validate approach empirically </li>
-                <li> promising results despite simplicity </li>
+                <li> framed traffic-related problems into <em>coordination</em> concepts </li>
+                <li> proposed autonomy-based <em>categorisation</em> of solution approaches </li>
+                <li> argued for <em>adjustable autonomy</em> in coordinated cooperative driving </li>
               </ul>
             </div>
             <div class="col fragment">
               <ul>
-                <li> extend to more complex measure of $C$ </li>
-                <li> extend to more $m \in M$ at once </li>
-                <li> extend to more sophisticated learning </li>
+                <li> propose practical approach to adjustable autonomy </li>
+                <li> further analyse mixed scenarios </li>
               </ul>
             </div>
           </div>
